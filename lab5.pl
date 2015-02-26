@@ -72,7 +72,8 @@ simplify(Var,Value,Vars):- Var=times(A,B), simplify(A,X,Vars), simplify(B,Y,Vars
 
 */
 
-
+append2DL(I-M, M-O, I-O).
+append3DL(I-M, M-O, O-P, I-P).
 
 
 /* 4:(10pts) Below is a database of US coins. 
@@ -93,4 +94,4 @@ coin(dime,10).
 coin(nickel,5).
 coin(penny,1).
 
-
+value(Coin, Number, Amount):- Coin=coin(Name,Value), coin(Name,Value), Amount is Value*Number.

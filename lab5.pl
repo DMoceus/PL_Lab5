@@ -52,8 +52,11 @@ subList4w(S,L):-write('4-1'),append(_,T,L),write(' 4-2'),write(T),append(S,_,T).
      Requires only a total 5 clauses including the clause from %2.  
     You may use "number" in one of your clauses. 
 */
-
-simplify(Var,Value,Vars):-atom(Var),member(Var:Value,Vars).  %% atom is an extra check
+simplify(Var,Value,_Vars):- number(Var), Value = Var.
+simplify(Var,Value,Vars):- atom(Var), member(Var:Value,Vars).  %% atom is an extra check
+simplify(Var,Value,Vars):- Var=plus(A,B), simplify(A,X,Vars), simplify(B,Y,Vars), Value is X+Y.
+simplify(Var,Value,Vars):- Var=minus(A,B), simplify(A,X,Vars), simplify(B,Y,Vars), Value is X-Y.
+simplify(Var,Value,Vars):- Var=times(A,B), simplify(A,X,Vars), simplify(B,Y,Vars), Value is X*Y.
 
 /*3:(10 pts) Define a predicate append3DL  that concatenates three difference lists:
    ?- append3DL( [z,y|A] - A, [x,w | B] -B, [u,v | C] - C, What).
@@ -68,6 +71,8 @@ simplify(Var,Value,Vars):-atom(Var),member(Var:Value,Vars).  %% atom is an extra
    A = [1, 2, 3, a, b, x, y, z|B].
 
 */
+
+
 
 
 /* 4:(10pts) Below is a database of US coins. 
